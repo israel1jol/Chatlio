@@ -1,0 +1,25 @@
+$app-bg-color: rgb(255, 255, 255);
+$app-def-color: rgba(3, 12, 66, 0.685);
+
+@mixin stylized-box-component {
+  padding: 10px;
+  text-align: center;
+  border-radius: 30px;
+  border: none;
+}
+
+@mixin box-check($color) {
+  border: 2px solid $color;
+}
+
+@mixin first-mobile-responsiveness {
+  @media (max-width: 900px) {
+    @content;
+  }
+}
+
+@mixin second-mobile-responsiveness {
+  @media (max-width: 580px) {
+    @content;
+  }
+}
