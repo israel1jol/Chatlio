@@ -2,27 +2,30 @@
 @import "app";
 @import "navbar";
 @import "home";
-@import "login";
+@import "auth";
+@import "chat";
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
 }
 
 ::-webkit-scrollbar {
-  width: 9px;
+  width: 7px;
   margin: 6px;
   padding: 6px;
 }
 
 ::-webkit-scrollbar-track {
   border-radius: 12px;
-  background-color: rgba(160, 160, 160, 0.836);
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {

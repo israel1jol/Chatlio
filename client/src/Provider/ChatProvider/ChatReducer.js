@@ -1,19 +1,23 @@
 const _chatSpace = {
-    chats:[
-        {
-            secondRoomUser:"admin",
-            roomId:null,
-            messages:["Hey!, Welcome to chatify."]
-        }
-    ]
+    receiver:{},
+    isActive:false
 }
 
-export default ChatReducer = (state=_chatSpace, action) => {
+const ChatReducer = (state=_chatSpace, action) => {
     const initial_state = state;
     switch(action.type){
-        case "connected":
+        case "gotEm":
             return {
-                chats: [...initial_state, action.payload.chats]
-            }
+                receiver: action.payload,
+                isActive:true
+            };
+
+        case "cancelEm":
+            return initial_state;
+
+        default:
+            return initial_state;
     }
 }
+
+export default ChatReducer;

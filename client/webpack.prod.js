@@ -35,6 +35,9 @@ module.exports = {
     resolve:{
         extensions:["*", ".js", ".jsx"]
     },
+    devServer:{
+        historyApiFallback:true
+    },
     plugins:[new MiniCssExtractPlugin(), new htmlWebpackPlugin({
         filename:"index.html",
         template:"public/index.html"

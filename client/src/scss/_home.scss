@@ -15,8 +15,7 @@
     width: 500px;
 
     @include second-mobile-responsiveness {
-      width: 300px;
-      margin: 0 20px;
+      width: 90vw;
     }
     h3 {
       text-align: center;
@@ -25,13 +24,16 @@
       color: rgba(8, 7, 97, 0.267);
 
       @include second-mobile-responsiveness {
-        font-size: 20px;
+        font-size: 28px;
       }
     }
   }
 
-  .illustration {
+  .illustration p {
+    transform: translateY(-30px);
     text-align: center;
+    color: rgba(0, 0, 0, 0.685);
+    font-size: 16px;
   }
 
   &-img {
@@ -41,7 +43,7 @@
     background-size: contain;
 
     @include second-mobile-responsiveness {
-      width: 70vw;
+      width: 90vw;
       height: 40vh;
     }
   }
@@ -59,7 +61,7 @@
   transition: 0.9s ease;
 
   &.open {
-    transform: translateY(-84vh) rotate(180deg);
+    transform: translateY(-81vh) rotate(180deg);
   }
 }
 
@@ -70,10 +72,12 @@
   height: 90vh;
   overflow-y: scroll;
   min-width: 89vw;
-  position: absolute;
-  top: 24vh;
-  left: 6vw;
   opacity: 0;
+  padding: 10px;
+  margin: 0 18px;
+  position: absolute;
+  top: 25vh;
+  left: 6vw;
   transition: 0.7s ease;
   transform: scaleY(0) translateY(70vh);
 
@@ -81,5 +85,75 @@
     transform: scaleY(1) translateY(-15vh);
     opacity: 0.9;
     display: block;
+  }
+
+  main {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    @include second-mobile-responsiveness {
+      display: block;
+    }
+
+    .panel-box-beta {
+      grid-column: 2/2;
+      margin-top: 27vh;
+
+      @include second-mobile-responsiveness {
+        margin-top: 0;
+      }
+    }
+
+    section {
+      width: 100%;
+      height: 60%;
+      padding: 5px;
+      position: relative;
+
+      img {
+        width: 100%;
+        margin: auto;
+        height: 70%;
+      }
+
+      p {
+        font-size: 16px;
+        color: rgba(5, 0, 26, 0.829);
+        margin: 3px 18px;
+      }
+
+      span {
+        font-size: 14px;
+        margin: 0 20px;
+        em {
+          font-weight: 500;
+          font-size: 12px;
+        }
+      }
+
+      .panel-btn {
+        background: rgb(255, 255, 255);
+        border-radius: 10px;
+        box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.185);
+        padding: 8px;
+        text-decoration: none;
+        position: absolute;
+        bottom: 7px;
+        left: 20px;
+        color: $app-def-color;
+        transition: all ease 400;
+
+        &:hover {
+          color: white;
+          background-color: $app-def-color;
+        }
+
+        &:active {
+          transform: scale(0.8);
+        }
+      }
+    }
   }
 }

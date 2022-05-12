@@ -1,0 +1,91 @@
+.stage {
+  height: 87vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .jumbotron {
+    padding: 15px;
+
+    .form-field {
+      box-shadow: 6px 5px 4px rgba(0, 0, 0, 0.11);
+    }
+
+    h3 {
+      text-align: center;
+      font-size: 30px;
+      font-weight: 600;
+      margin: 10px 0;
+      color: lighten($color: $app-def-color, $amount: 10);
+    }
+
+    form {
+      line-height: 4rem;
+      position: relative;
+      div {
+        display: flex;
+        align-items: center;
+        label {
+          font-size: 25px;
+          color: darken($color: $app-def-color, $amount: 30);
+          margin: 0 10px;
+        }
+        input {
+          min-width: 20vw;
+          height: 31px;
+          border: 1px solid rgba(0, 0, 0, 0.281);
+          margin: 0 3px;
+          border-radius: 5px;
+
+          @include second-mobile-responsiveness {
+            min-width: 30vw;
+          }
+        }
+      }
+    }
+
+    .uploadButton {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      text-align: center;
+      transform: translateY(-20px);
+      padding: 20px;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(26, 3, 88, 0.671);
+
+      .check-icon {
+        display: none;
+        position: absolute;
+        right: 32px;
+        bottom: 10px;
+        opacity: 0.8;
+        font-size: 20px;
+        color: $app-def-color;
+
+        &.open {
+          display: block;
+        }
+      }
+
+      .lead {
+        color: white;
+        margin: 8px 0;
+      }
+
+      .icon {
+        font-size: 40px;
+        color: white;
+      }
+    }
+
+    .actualUploader {
+      display: none;
+    }
+  }
+}
