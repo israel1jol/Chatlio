@@ -11,7 +11,7 @@ require("dotenv").config();
 const app = express();
 
 app.use(express.json());
-app.use(cors({origin:process.env.CLIENT_SERVER}));
+app.use(cors({origin:""}));
 
 const server = http.createServer(app);
 
@@ -51,5 +51,5 @@ app.use("/api/v1/auth", require("./routes/Auth"));
 app.use("/api/v1/chat", require("./routes/Chat"));
 app.use("/api/v1/uploads", express.static(path.join(__dirname, "uploads")));
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8081;
 server.listen(PORT, () => console.log(`Server started on port ${PORT}`));
