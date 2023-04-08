@@ -43,6 +43,10 @@ io.on("connection", (socket) => {
 })
 
 
+app.get("/", (req, res) => {
+    res.status(404).send("That route doesn't exist for this api");
+})
+
 app.use("/api/v1/auth", require("./routes/Auth"));
 app.use("/api/v1/chat", require("./routes/Chat"));
 app.use("/api/v1/uploads", express.static(path.join(__dirname, "uploads")));
