@@ -44,7 +44,7 @@ io.on("connection", (socket) => {
 
 
 app.get("/", (req, res) => {
-    res.status(404).send("That route doesn't exist for this api");
+    res.status(404).send("The route doesn't exist for this api");
 })
 
 app.use("/api/v1/auth", require("./routes/Auth"));
