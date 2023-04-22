@@ -62,7 +62,7 @@ const Chat = ({addr}) => {
 
         dispatch({type:"invalidate_error"})
 
-        fetch(`${addr}/api/v1/auth/profile`+locateId).then(res => res.json())
+        fetch(`${addr}/api/v1/auth/profile/`+locateId).then(res => res.json())
         .then(data => {
             if(data.error){
                 return dispatch({type:"active_session_with_error", error:{err:true, type:"general-error", message:data.error}})

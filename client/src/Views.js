@@ -14,7 +14,7 @@ const Navbar = React.lazy(() => import("./Components/Navbar"));
 export default function Views(){
     const dispatch = useDispatch();
 
-    const SERVER_ADDR = "https://";
+    const SERVER_ADDR = "http://localhost:8081";
 
     useEffect(() => {
         const token = localStorage.getItem("refToken");
