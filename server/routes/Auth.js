@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const upload = require("../middleware/upload");
 const { validateAccessToken, validateRefreshToken } = require("../middleware/index");
+const { mailNewUserMessage } = require("../middleware/mailer");
 
 route.post("/info", validateAccessToken, async (req, res) =>{
     const id = req.user.id;
@@ -54,11 +55,12 @@ route.post("/register", async (req, res) =>{
         return res.status(401).json({"error":"The email is already registered", "user":user});
     }
 
-    User.create({firstname:firstname, lastname:lastname, username:username, email:email, password:hash}, (err, user) =>{
+    User.create({firstname:firstname, lastname:lastname, username:username, email:email, password:hash}, async (err, user) =>{
         if(err){
             return res.status(401).json({"error":"The email is already registered"});
         }
-        return res.status(200).json(user)
+        mailNewUserMessage(user);
+        return res.status(200).json(user); 
     })
 })
 

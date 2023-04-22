@@ -1,6 +1,8 @@
 const route = require("express").Router();
 const Room = require("../models/Room");
+const User = require("../models/User");
 const { validateAccessToken } = require("../middleware/index");
+const {mailNewChatMessage} = require("../middleware/mailer");
 
 route.post("/roomData/:secondId", validateAccessToken, async (req, res) => {
     try{
@@ -15,6 +17,8 @@ route.post("/roomData/:secondId", validateAccessToken, async (req, res) => {
             return res.json({response:"Room Found",room:receiver_request, userId:id});
         }
         const room = await Room.create({firstUserId:id, secondUserId:Id});
+        const secondUser = await User.findById(Id);
+        mailNewChatMessage(req.user, secondUser);
         return res.status(200).json({response:"Room Created", room:room, userId:id});
     }
     catch(e){

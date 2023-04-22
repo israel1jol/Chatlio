@@ -11,7 +11,7 @@ require("dotenv").config();
 const app = express();
 
 app.use(express.json());
-app.use(cors({origin:""}));
+app.use(cors({origin:"*"}));
 
 const server = http.createServer(app);
 
@@ -24,7 +24,6 @@ mongoose.connection.once("open", () => {
 
 io.on("connection", (socket) => {
     socket.on("join", async (data, cb) => {
-        console.log("Client browser has joined the connection and joined", data.room);
         socket.join(data.room);
         const res = await getMessages(data.room);
         if(res.error){
