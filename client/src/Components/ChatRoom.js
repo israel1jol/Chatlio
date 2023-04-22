@@ -54,6 +54,7 @@ const ChatRoom = ({addr}) => {
             dispatch({type:"invalidate_error"})
             setRoomId(data.room._id);
             setUserId(data.userId);
+            setIsLoading(false);
         }).catch(e => dispatch({type:"active_session_with_error", error:{err:true, type:"general-error", message:"Can't connect to server"}}))
     }, [auth.user.token])
 
