@@ -6,7 +6,9 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import ChatReducer from "./Provider/ChatProvider/ChatReducer";
 import AuthReducer from "./Provider/AuthProvider/AuthReducer";
 
+
 const App = () => {
+
     const appReducer = combineReducers({auth:AuthReducer, chat:ChatReducer});
 
     const store = configureStore({

@@ -46,7 +46,7 @@ const Login = () => {
                 {auth.error.type==="general-error" && auth.error.err ? <div className={auth.error.type}>{auth.error.message}</div> : <></>}
                 <div className="jumbotron">
                     <div className="form-field">
-                    <h3>LOGIN</h3>
+                    <h3>Login</h3>
                     <form method="POST" action="/home" onSubmit={formHandler}>
                         {auth.error.type=== "component-based"  ? <div className={auth.error.type}>{auth.error.message}</div> : <></>}
                         <div>
@@ -57,7 +57,7 @@ const Login = () => {
                             <label htmlFor="password">Password</label>
                             <input type="password" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                         </div>
-                        <input type="submit" value="Login" className="custom-btn"/>
+                        <input type="submit" value="Login" className="custom-btn submit-btn"/>
                     </form>
                     </div>
                 </div>

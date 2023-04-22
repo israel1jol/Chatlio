@@ -7,7 +7,7 @@ export const useLtp = () => {
 }
 
 export const useAuth = () => {
-    const SERVER_ADDR = "http://localhost:8081"
+    const SERVER_ADDR = "";
     const dispatch = useDispatch();
 
     return (email, password) => {

@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import { useAuth } from "../Hooks/Hooks";
 import { useSelector, useDispatch } from "react-redux";
 import { FaUserAlt, FaCheckCircle } from "react-icons/fa"
 import { SuspenseLoader } from "../Components/Loaders";
 
 const Register = ({addr}) => {
+    const [cookie, setCookie, removeCookie] = useCookies(["success_message"]);
     const [email, setEmail] = useState("");
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [rePassword, setRePassword] = useState("");
     const [unregistered, setUnregistered] = useState(true);
     const [pic, setPic] = useState("");
     const [loading, setIsLoading] = useState(false);
@@ -23,6 +26,8 @@ const Register = ({addr}) => {
 
     const loginUser = useAuth();
 
+    console.log("The cookie value is", cookie.success_message)
+
     useEffect(() => {
         if(!localStorage.getItem("Page_needed_to") && localStorage.getItem("refToken") ){
             return nav("/")
@@ -34,6 +39,9 @@ const Register = ({addr}) => {
 
     const register = (e) => {
         e.preventDefault();
+        if(password !== rePassword){
+            return   dispatch({type:"active_session_with_error", error:{err:true, type:"component-based",message:"Password does not match"}});
+        }
         setIsLoading(true);
 
         dispatch({type:"invalidate_error"});
@@ -55,6 +63,7 @@ const Register = ({addr}) => {
             localStorage.setItem("Page_needed_to", "Profile image not set");
             setUnregistered(false);
             setIsLoading(false);
+            setCookie("success_message", true, {maxAge:30});
         }).catch(e => {
             setIsLoading(true);
             return dispatch({type:"active_session_with_error", error:{err:true, type:"general-error", message:"Can't connect to server"}})
@@ -76,7 +85,6 @@ const Register = ({addr}) => {
             dispatch({type:"invalidate_error"});
         }
     },[])
-
     return (
         <div className="stage">
             {
@@ -88,7 +96,7 @@ const Register = ({addr}) => {
                 {
                     unregistered ? 
                     <div className="form-field">
-                    <h3>REGISTER</h3>
+                    <h3>Create an account</h3>
                     <form method="POST" action="/login" onSubmit={register}>
                         <div>
                             <label htmlFor="firstname">Firstname</label>
@@ -110,11 +118,17 @@ const Register = ({addr}) => {
                             <label htmlFor="password">Password</label>
                             <input type="password" name="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                         </div>
-                        <input type="submit" className="custom-btn"  value="Register"/>
+                        <div>
+                            <label htmlFor="re-password">Re-Password</label>
+                            <input type="password" name="re-password" id="re-password" value={rePassword} onChange={(e) => setRePassword(e.target.value)} required/>
+                        </div>
+                        <input type="submit" className="custom-btn submit-btn"  value="Sign Up"/>
                     </form>   
                     </div>
                     :
                     <>
+                    {cookie.success_message ? <div className="general-error success-message">Account created successfully! We just sent you an email (Note: Check spam folder if email not in inbox)</div> : <></>}
+                    <div id="messagePlaceHolder"></div>
                     <div className="uploadButton" onClick={triggerFileInput}>
                         <div className="button-area">
                             <FaUserAlt className="icon"/> 
@@ -125,7 +139,7 @@ const Register = ({addr}) => {
                     <form action={`${addr}/api/v1/auth/profilePic`} method="post" encType="multipart/form-data">
                         <input type="file" id="fileUpload" name="pic" className="actualUploader" value={pic} onChange={(e) => setPic(e.target.value)} required/>
                         <input type="hidden" name="token" value={auth.user.token ? auth.user.token : ""}/>
-                        { pic.substring(pic.length-4) !== ".jpg" && pic.substring(pic.length-5) !== ".jpeg" && pic.substring(pic.length-4) !== ".png"? <h4>JPG, JPEG OR PNG FORMAT.</h4>  : <input type="submit" value="Upload Picture" className="simple-btn simple-btn-primary"/>}
+                        { pic.substring(pic.length-4) !== ".jpg" && pic.substring(pic.length-5) !== ".jpeg" && pic.substring(pic.length-4) !== ".png"? <h4>JPG, JPEG OR PNG FORMAT.</h4>  : <input type="submit" value="Upload Picture" className="simple-btn upload-btn simple-btn-primary"/>}
                     </form>
                     <button className="simple-btn simple-btn-secondary" onClick={() => nav("/")}>Skip</button>
                     </>

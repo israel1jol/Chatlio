@@ -26,7 +26,7 @@ const Home = () => {
             {auth.error.type==="general-error" ? <div className={auth.error.type}>{auth.error.message}</div> : <></>}
             <header className="home-header">
                 <div className="heading">
-                    <h3>Chat with anyone, anywhere. With Chatify.</h3>
+                    <h3>Chat with anyone, anywhere. With Chatlio.</h3>
                 </div>
                 <div className="illustration">
                     <img src="https://i.postimg.cc/3xKRh3vc/vecteezy-people-working-and-meeting-illustration.jpg" alt="image" className="home-header-img"/>

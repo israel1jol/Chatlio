@@ -37,20 +37,19 @@ const Navbar = ({addr}) => {
                  <div className="responsive-nav-view">
                  <div className="hamburger-btn" id="hamburger-btn" onClick={menuBtnHandler}></div>
                  <nav className="responsive-nav" id="responsive-nav">
-                     <div className="notifier"><span>Guest</span></div>
                      <ul>
-                         <li><Link to="/" className="nav-link" onClick={menuBtnHandler}>HOME</Link></li>
-                         <li><Link to="/login" className="nav-link" onClick={menuBtnHandler}>LOGIN</Link></li>
-                         <li><Link to="/register" className="nav-link" onClick={menuBtnHandler}>REGISTER</Link></li>
+                         <li><Link to="/" className="nav-link" onClick={menuBtnHandler}>Home</Link></li>
+                         <li><Link to="/login" className="nav-link" onClick={menuBtnHandler}>Login</Link></li>
+                         <li><Link to="/register" className="nav-link" onClick={menuBtnHandler}>Sign Up</Link></li>
                      </ul>
                  </nav>
              </div>
 
              <nav className="standard-nav">
                  <ul>
-                     <li><Link to="/" className="nav-link">HOME</Link></li>
-                     <li><Link to="/login" className="nav-link">LOGIN</Link></li>
-                     <li><Link to="/register" className="nav-link">REGISTER</Link></li>
+                     <li><Link to="/" className="nav-link">Home</Link></li>
+                     <li><Link to="/login" className="nav-link">Login</Link></li>
+                     <li><Link to="/register" className="nav-link">Sign Up</Link></li>
                  </ul>
              </nav></> : 
              <>
@@ -61,21 +60,20 @@ const Navbar = ({addr}) => {
                  </div>
                  <div className="hamburger-btn" id="hamburger-btn" onClick={menuBtnHandler}></div>
                  <nav className="responsive-nav" id="responsive-nav">
-                     <div className="notifier"><span>0</span></div>
                      <ul>
-                         <li><Link to="/" className="nav-link" onClick={menuBtnHandler}>HOME</Link></li>
-                         <li><Link to="/explore" className="nav-link" onClick={menuBtnHandler}>EXPLORE</Link></li>
-                         <li><p className="nav-link" onClick={(e) => logout()}>LOGOUT</p></li>
+                         <li><Link to="/" className="nav-link" onClick={menuBtnHandler}>Home</Link></li>
+                         <li><Link to="/explore" className="nav-link" onClick={menuBtnHandler}>Explore</Link></li>
+                         <li><p className="logout-btn nav-link" onClick={(e) => logout()}>Logout</p></li>
                      </ul>
                  </nav>
              </div>
 
              <nav className="standard-nav">
                  <ul>
-                     <li><Link to="/" className="nav-link">HOME</Link></li>
-                     <li><Link to="/explore" className="nav-link">EXPLORE</Link></li>
-                     <li><Link to="/profile" className="simple-btn simple-btn-secondary">{user.user.username}</Link></li>
-                     <li><p onClick={(e) => logout()}>LOGOUT</p></li>
+                     <li><Link to="/" className="nav-link">Home</Link></li>
+                     <li><Link to="/explore" className="nav-link">Explore</Link></li>
+                     <li><Link to="/profile" className="simple-btn simple-btn-primary">{user.user.username}</Link></li>
+                     <li><p className="logout-btn nav-link" onClick={(e) => logout()}>Logout</p></li>
                  </ul>
              </nav>
              </>                
