@@ -23,7 +23,6 @@ const ChatRoom = ({addr}) => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        console.log("The user token is", auth.user.token);
         if(!localStorage.getItem("refToken")){
             return nav("/login");
         }

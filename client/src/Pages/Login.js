@@ -1,3 +1,4 @@
+// ...existing code...
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Hooks/Hooks";
@@ -15,29 +16,43 @@ const Login = () => {
 
     const loginUser = useAuth();
 
-    const formHandler = (e) => {
-        setLoading(true);
+    const formHandler = async (e) => {
         e.preventDefault();
+        setLoading(true);
         dispatch({type:"invalidate_error"});
-        loginUser(email, password);
-        if(auth.isAuthenticated){            
-            return nav("/")
+        // call login action; if it returns a promise await it
+        try {
+            const res = loginUser(email, password);
+            if (res && typeof res.then === "function") await res;
+        } catch (err) {
+            // noop — auth reducer should surface errors
         }
-        setLoading(false);
-        
+        // do NOT setLoading(false) here — wait for auth update in effect below
     }
 
     useEffect(() => {
         if(localStorage.getItem("refToken")){
-            return nav("/")
+            nav("/");
         }
-    })
+    }, [nav]);
+
+    // watch auth to stop loader / navigate
+    useEffect(() => {
+        if(auth.authenticated){
+            nav("/");
+            return;
+        }
+        if(auth.error && auth.error.err){
+            setLoading(false);
+        }
+    }, [auth.authenticated, auth.error, nav]);
 
     useEffect(() => {
         return () => {
-            clearTimeout()
+            dispatch({type:"invalidate_error"});
+            setLoading(false);
         }
-    })
+    }, [dispatch])
 
     return (
         <div className="stage">
@@ -46,7 +61,7 @@ const Login = () => {
                 {auth.error.type==="general-error" && auth.error.err ? <div className={auth.error.type}>{auth.error.message}</div> : <></>}
                 <div className="jumbotron">
                     <div className="form-field">
-                    <h3>Login</h3>
+                    <h3>Log in to Chatlio</h3>
                     <form method="POST" action="/home" onSubmit={formHandler}>
                         {auth.error.type=== "component-based"  ? <div className={auth.error.type}>{auth.error.message}</div> : <></>}
                         <div>
@@ -68,3 +83,4 @@ const Login = () => {
 }
 
 export default Login
+// ...existing code...

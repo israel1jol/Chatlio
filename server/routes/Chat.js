@@ -31,8 +31,9 @@ route.post("/recentChats", validateAccessToken, async (req, res) => {
         const id = req.user.id;
         const started_rooms = await Room.find({firstUserId:id})
         const joined_rooms = await Room.find({secondUserId:id})
-        const recent_chats =started_rooms.map(rooms => rooms.secondUserId)
-        joined_rooms.forEach(rooms => recent_chats.push(rooms.firstUserId))
+        const recents =started_rooms.map(rooms => rooms.secondUserId)
+        joined_rooms.forEach(rooms => recents.push(rooms.firstUserId))
+        const recent_chats = Array.from(new Set(recents));
         return res.json(recent_chats);
     }
     catch(e){

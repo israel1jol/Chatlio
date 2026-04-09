@@ -50,7 +50,6 @@ const Chat = ({addr}) => {
             }
             dispatch({type:"invalidate_error"})
             setContacts(data)
-            console.log("Hey mehn")
         })
     }, [recents])
 

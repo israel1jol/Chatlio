@@ -97,7 +97,7 @@ const Register = ({addr}) => {
                     unregistered ? 
                     <div className="form-field">
                     <h3>Create an account</h3>
-                    <form method="POST" action="/login" onSubmit={register}>
+                    <form method="POST" action="/register" onSubmit={register}>
                         <div>
                             <label htmlFor="firstname">Firstname</label>
                             <input type="text" name="firstname" id="firstname" value={firstname} onChange={(e) => setFirstname(e.target.value)} required/>

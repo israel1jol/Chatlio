@@ -30,6 +30,7 @@ io.on("connection", (socket) => {
             return cb(true, {error:res.response});
         }
         cb(null, res.response);
+
     })
 
     socket.on("sendMessage", async (data, cb) => {

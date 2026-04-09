@@ -40,7 +40,7 @@ const mailNewChatMessage = async (chatInitializingUser, userToBeEmailed) => {
 
     const mailIns = await transport.sendMail({
         from:process.env.ZOHO_MAIL,
-        to:chatInitializingUser.email,
+        to:userToBeEmailed.email,
         subject:"New Chat Added",
         text:message.substring(message.indexOf("Hi!"), message.indexOf("</p>")),
         html:message
