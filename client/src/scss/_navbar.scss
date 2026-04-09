@@ -29,7 +29,8 @@
 
     .logout-btn{
       cursor: pointer;
-      color: whitesmoke;
+      display: inline;
+
     }
 
 
@@ -44,15 +45,13 @@
       }
 
       ul {
-        border-radius: 20px;
-        background: linear-gradient(to left, $app-def-color, $app-def-color, $app-def-color);
-        box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.751);
         padding: 12px 15px;
         z-index: 100;
-        width: 50%;
+        width: 30%;
         display: flex;
         justify-content: space-between;
         list-style: none;
+
 
         @include first-mobile-responsiveness {
           width: 70%;
@@ -63,31 +62,18 @@
           font-weight: 400;
           
           .nav-link {
+            color: rgb(85, 26, 139);
             text-decoration: none;
-            color: rgba(255, 255, 255, 0.904);
             transition: all ease 0.4s;
             position: relative;
             z-index: 100000000;
-            &::before{
-              z-index: -1;
-              transition: all ease 0.6s;
-            }
-      
-
+    
             &:hover {
               position: relative;
-              color: rgba(0, 0, 0, 0.618);
-
-              &::before {
-                content: "";
-                width: 140%;
-                background-color: rgb(255, 255, 255);
-                position: absolute;
-                top: -10%;
-                left: -20%;
-                height: 120%;
-                border-radius: 15px;
-              }
+              color: rgb(255, 255, 255);
+              background-color: $app-def-color;
+              padding: 10px 15px;
+              border-radius: 30px;
             }
           }
         }
