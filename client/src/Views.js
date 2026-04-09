@@ -14,7 +14,7 @@ const Navbar = React.lazy(() => import("./Components/Navbar"));
 export default function Views(){
     const dispatch = useDispatch();
 
-    const SERVER_ADDR = "http://localhost:8081"; // "https://chatlio-backend-server.onrender.com" in production
+    const SERVER_ADDR ="https://chatlio-backend-server.onrender.com"
 
     useEffect(() => {
         const token = localStorage.getItem("refToken");
