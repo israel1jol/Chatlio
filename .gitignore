@@ -2,4 +2,4 @@
 **/build
 **/media
 **/dist
-.env
+*/package-lock.json
