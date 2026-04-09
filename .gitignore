@@ -3,3 +3,4 @@
 **/media
 **/dist
 */package-lock.json
+.env
