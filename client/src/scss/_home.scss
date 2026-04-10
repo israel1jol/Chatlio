@@ -144,7 +144,13 @@
         border-radius: 10px;
         box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.185);
         padding: 8px;
+        transition:all ease 400;
         text-decoration: none; 
+
+        &:hover{
+          background-color: $app-def-color;
+          color: rgba(24, 24, 24, 0.859);
+        }
       }
 
       .panel-btn {

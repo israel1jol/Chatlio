@@ -70,10 +70,11 @@ const Home = () => {
                             <Link to="/register" className="panel-btn">Sign up to get started</Link>
                         </div> :
                         <div>
-                         <p>Your Id is <em>{auth.user.id}</em></p>
+                         <p>Your Id is <em>{auth.user.id}</em>
                          <span onClick={() => copyToClipboard(auth.user.id)} className="copy-btn">
                                 {copied ? "Copied!" : "Copy"}
                         </span>
+                        </p>
                          </div>
                         }
                     </section>
