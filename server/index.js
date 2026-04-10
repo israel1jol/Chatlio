@@ -49,7 +49,6 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/auth", require("./routes/Auth"));
 app.use("/api/v1/chat", require("./routes/Chat"));
-app.use("/api/v1/uploads", express.static(path.join(__dirname, "uploads")));
 
 const PORT = process.env.PORT || 8081;
 server.listen(PORT, () => console.log(`Server started on port ${PORT}`));
