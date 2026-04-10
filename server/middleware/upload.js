@@ -1,14 +1,12 @@
 const multer = require("multer");
 const multerS3 = require("multer-s3");
-const { S3 } = require("aws-sdk");
+const AWS = require("aws-sdk");
 const path = require("path");
 
-const s3 = new S3({
+const s3 = new AWS.S3({
     region: process.env.AWS_REGION,
-    credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-    }
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });
 
 const upload = multer({
@@ -19,8 +17,8 @@ const upload = multer({
             const ext = path.extname(file.originalname);
             const time = Date.now();
             cb(null, time + ext);
-        },
-        acl: "public-read"
+        }
+        // removed acl
     }),
     limits: {
         fileSize: 10000000 // 10MB
