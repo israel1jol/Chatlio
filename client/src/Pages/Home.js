@@ -71,9 +71,9 @@ const Home = () => {
                         </div> :
                         <div>
                          <p>Your Id is <em>{auth.user.id}</em></p>
-                         <button onClick={() => copyToClipboard(auth.user.id)} className="custom-btn">
+                         <span onClick={() => copyToClipboard(auth.user.id)} className="panel-btn">
                                 {copied ? "Copied!" : "Copy"}
-                        </button>
+                        </span>
                          </div>
                         }
                     </section>
