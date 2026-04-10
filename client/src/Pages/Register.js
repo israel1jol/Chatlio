@@ -15,18 +15,16 @@ const Register = ({addr}) => {
     const [password, setPassword] = useState("");
     const [rePassword, setRePassword] = useState("");
     const [unregistered, setUnregistered] = useState(true);
-    const [pic, setPic] = useState("");
+    const [picFile, setPicFile] = useState(null);
+    const [picPreview, setPicPreview] = useState("");
     const [loading, setIsLoading] = useState(false);
+    const [uploadError, setUploadError] = useState("");
+    const [uploading, setUploading] = useState(false);
 
     const dispatch = useDispatch();
-
     const nav = useNavigate();
-
     const auth = useSelector(store => store.auth);
-
     const loginUser = useAuth();
-
-    console.log("The cookie value is", cookie.success_message)
 
     useEffect(() => {
         if(!localStorage.getItem("Page_needed_to") && localStorage.getItem("refToken") ){
@@ -40,10 +38,9 @@ const Register = ({addr}) => {
     const register = (e) => {
         e.preventDefault();
         if(password !== rePassword){
-            return   dispatch({type:"active_session_with_error", error:{err:true, type:"component-based",message:"Password does not match"}});
+            return dispatch({type:"active_session_with_error", error:{err:true, type:"component-based",message:"Password does not match"}});
         }
         setIsLoading(true);
-
         dispatch({type:"invalidate_error"});
 
         fetch(`${addr}/api/v1/auth/register`, {
@@ -65,39 +62,90 @@ const Register = ({addr}) => {
             setIsLoading(false);
             setCookie("success_message", true, {maxAge:30});
         }).catch(e => {
-            setIsLoading(true);
+            setIsLoading(false);
             return dispatch({type:"active_session_with_error", error:{err:true, type:"general-error", message:"Can't connect to server"}})
         })
     }
 
-
     const triggerFileInput = () => {
         document.getElementById("fileUpload").click()
     }
-    useEffect(() => {
-        if(pic.substring(pic.length-4) !== ".jpg" && pic.substring(pic.length-5) !== ".jpeg" && pic.substring(pic.length-4) !== ".png"){
-            setPic("");
+
+    const handleFileChange = (e) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        
+        const validTypes = ["image/jpeg", "image/jpg", "image/png"];
+        if (!validTypes.includes(file.type)) {
+            setUploadError("JPG, JPEG OR PNG FORMAT.");
+            setPicFile(null);
+            setPicPreview("");
+            return;
         }
-    }, [pic])
+
+        setPicFile(file);
+        setPicPreview(URL.createObjectURL(file));
+        setUploadError("");
+    };
+
+    const uploadProfilePic = async () => {
+        if (!picFile) {
+            setUploadError("Select a photo first");
+            return;
+        }
+
+        setUploading(true);
+        setUploadError("");
+
+        const formData = new FormData();
+        formData.append("pic", picFile);
+
+        try {
+
+            console.log("token", auth.user.token)
+            const res = await fetch(`${addr}/api/v1/auth/profilePic`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${auth.user.token}`
+                },
+                body: formData
+            });
+
+            const data = await res.json();
+            if (!res.ok || data.error) {
+                setUploadError(data.error || "Upload failed");
+                setUploading(false);
+                return;
+            }
+
+            dispatch({ type: "active_session", payload: data.user || data });
+            setUploading(false);
+            nav("/");
+        } catch (err) {
+            setUploadError("Could not upload profile picture");
+            setUploading(false);
+        }
+    };
 
     useEffect(() => {
         return() => {
             dispatch({type:"invalidate_error"});
         }
     },[])
+
     return (
         <div className="stage">
             {
                 loading ? <SuspenseLoader/> : 
                 <>
-                {auth.error.type==="general-error" ? <div className={auth.error.type} on>{auth.error.message}</div> : <></>}
+                {auth.error.type==="general-error" ? <div className={auth.error.type}>{auth.error.message}</div> : <></>}
             <div className="jumbotron">
                 { auth.error.type === "component-based" ? <div className={auth.error.type}>{ auth.error.message }</div> :  <></> }
                 {
                     unregistered ? 
                     <div className="form-field">
                     <h3>Create an account</h3>
-                    <form method="POST" action="/register" onSubmit={register}>
+                    <form method="POST" onSubmit={register}>
                         <div>
                             <label htmlFor="firstname">Firstname</label>
                             <input type="text" name="firstname" id="firstname" value={firstname} onChange={(e) => setFirstname(e.target.value)} required/>
@@ -128,20 +176,23 @@ const Register = ({addr}) => {
                     :
                     <>
                     {cookie.success_message ? <div className="general-error success-message">Account created successfully! We just sent you an email (Note: Check spam folder if email not in inbox)</div> : <></>}
+                    {uploadError && <div className="component-based">{uploadError}</div>}
                     <div id="messagePlaceHolder"></div>
                     <div className="uploadButton" onClick={triggerFileInput}>
                         <div className="button-area">
                             <FaUserAlt className="icon"/> 
-                            <div className="lead">Tap here to select an image &lt; 1MB</div>
-                            <FaCheckCircle className={`check-icon ${ pic !== "" ? "open" : "" }`}/>
+                            <div className="lead">{picFile ? picFile.name : "Tap here to select an image < 1MB"}</div>
+                            <FaCheckCircle className={`check-icon ${ picFile !== null ? "open" : "" }`}/>
                         </div>
                     </div>
-                    <form action={`${addr}/api/v1/auth/profilePic`} method="post" encType="multipart/form-data">
-                        <input type="file" id="fileUpload" name="pic" className="actualUploader" value={pic} onChange={(e) => setPic(e.target.value)} required/>
-                        <input type="hidden" name="token" value={auth.user.token ? auth.user.token : ""}/>
-                        { pic.substring(pic.length-4) !== ".jpg" && pic.substring(pic.length-5) !== ".jpeg" && pic.substring(pic.length-4) !== ".png"? <h4>JPG, JPEG OR PNG FORMAT.</h4>  : <input type="submit" value="Upload Picture" className="simple-btn upload-btn simple-btn-primary"/>}
-                    </form>
-                    <button className="simple-btn simple-btn-secondary" onClick={() => nav("/")}>Skip</button>
+                    <input type="file" id="fileUpload" name="pic" className="actualUploader" accept="image/*" onChange={handleFileChange} style={{display: "none"}}/>
+                    
+                    {picFile && (
+                        <button type="button" className="simple-btn upload-btn simple-btn-primary" onClick={uploadProfilePic} disabled={uploading}>
+                            {uploading ? "Uploading..." : "Upload Picture"}
+                        </button>
+                    )}
+                    <button type="button" className="simple-btn simple-btn-secondary" onClick={() => nav("/")}>Skip</button>
                     </>
                 }
             </div>
@@ -152,4 +203,3 @@ const Register = ({addr}) => {
 }
 
 export default Register
-
