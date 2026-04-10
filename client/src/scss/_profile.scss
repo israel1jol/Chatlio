@@ -1,0 +1,233 @@
+.profile-page {
+  padding: 40px 32px;
+  background-color: $app-bg-color;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.profile-card {
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  @include box-check($app-def-color);
+  grid-template-columns: 360px 1fr;
+  gap: 2rem;
+  padding: 32px;
+  background: #fff;
+  border-radius: 28px;
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.12);
+}
+
+.profile-sidebar {
+  background: rgba(85, 20, 206, 0.06);
+  border-radius: 24px;
+  padding: 30px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  text-align: center;
+}
+
+.profile-avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid rgba(85, 20, 206, 0.2);
+  background: #f7f6ff;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-size: 3rem;
+  color: rgba(85, 20, 206, 0.6);
+}
+
+.profile-sidebar-meta h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #222;
+}
+
+.profile-sidebar-meta p {
+  margin: 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+.profile-photo-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+}
+
+.file-label,
+.profile-photo-actions button {
+  margin: 0 auto;
+    @include box-check($app-def-color);
+
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #333;
+    transition: all 0.2s ease;
+}
+.file-label{
+    padding: 10px 12px;
+        &:hover{
+        background-color: $app-def-color;
+        color: #fff;
+    }
+}
+.profile-photo-actions button{
+    background-color: $app-def-color;
+    padding: 5px 8px;
+        &:hover{
+        background-color: white;
+        color: $app-def-color;
+    }
+}
+
+.profile-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.profile-actions button {
+    padding: 5px 10px;
+    background-color: $app-def-color;
+    color: #fff;
+    border: 1px solid rgba(87, 87, 87, 0.781);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s ease, color 0.2s ease;
+
+    &:hover {
+        background-color: white;
+        color: $app-def-color;
+        border-color: $app-def-color;
+        box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.212);
+    }
+}
+
+.file-label input {
+  display: none;
+}
+
+.profile-main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.profile-main h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #222;
+}
+
+.profile-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-group input {
+  width: 100%;
+  min-height: 48px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  background: #fff;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: $app-def-color;
+  box-shadow: 0 0 0 4px rgba(85, 20, 206, 0.1);
+}
+
+
+.profile-message {
+  border-radius: 16px;
+  padding: 14px 18px;
+  background: rgba(85, 20, 206, 0.08);
+  color: #221d49;
+  font-size: 0.95rem;
+}
+
+.profile-message.error {
+  background: rgba(255, 89, 89, 0.1);
+  color: #8a1c1c;
+}
+
+@media (max-width: 960px) {
+  .profile-page {
+    align-items: stretch;
+  }
+
+  .profile-card {
+    grid-template-columns: 1fr;
+    padding: 24px;
+    gap: 1.5rem;
+    min-height: auto;
+  }
+
+  .profile-form {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-actions {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-page {
+    padding: 24px 16px;
+    align-items: stretch;
+  }
+
+  .profile-card {
+    padding: 20px;
+    gap: 1.5rem;
+  }
+
+  .profile-sidebar {
+    padding: 24px 18px;
+  }
+
+  .profile-photo-actions button,
+  .file-label {
+    font-size: 0.95rem;
+  }
+
+  .profile-actions button {
+    width: auto;
+    min-width: 180px;
+  }
+}
