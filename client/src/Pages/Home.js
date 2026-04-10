@@ -56,7 +56,7 @@ const Home = () => {
 
             <button className="toggler" onClick={toggle}> 
                 <FaLongArrowAltUp size="30" color="grey" />
-                <p className="toggler-text">Click me</p>
+                <p className="toggler-text">{showPanel ? "Click to close" : "Click me"}</p>
             </button>
             
             <div className="panel">
