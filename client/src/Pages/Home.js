@@ -54,10 +54,13 @@ const Home = () => {
                 { auth.authenticated && auth.user.profileImage === "" ? <Link to="/register" className="simple-btn simple-btn-primary">Finish registration</Link> : <></> }
             </header>
 
-            <button className="toggler" onClick={toggle}> 
-                <FaLongArrowAltUp size="30" color="grey" />
-                <p className="toggler-text">{showPanel ? "Click to close" : "Click me"}</p>
+            <button className="toggler" onClick={toggle}>
+                 <FaLongArrowAltUp size="30" color="grey" /> 
+                <p className={`toggler-text ${showPanel ? "reverse" : ""}`}>
+                    {showPanel ? "Tap here to close" : "Click me"}
+                </p>
             </button>
+
             
             <div className="panel">
                 <main>

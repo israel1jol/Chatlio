@@ -63,17 +63,21 @@
   z-index: 10000;
   left: 50vw;
   transition: 0.9s ease;
+  animation: float 3s ease-in-out infinite;
 
-  .toggler-text {
-    font-size: 12px;
-    color: grey;
-    margin: 0;
-    font-weight: 500;
+  @include second-mobile-responsiveness {
+    left: 44vw;
+  }
+
+  .reverse {
     transform: rotate(180deg);
   }
 
   &.open {
+
+    animation: none;
     transform: translateY(-81vh) rotate(180deg);
+   
   }
 }
 
@@ -83,15 +87,19 @@
   border-radius: 10px 10px 0 0;
   height: 90vh;
   overflow-y: scroll;
-  min-width: 89vw;
+  min-width: 60vw;
   opacity: 0;
   padding: 10px;
-  margin: 0 18px;
+  margin: 0 100px;
   position: absolute;
   top: 25vh;
   left: 6vw;
-  transition: 0.7s ease;
-  transform: scaleY(0) translateY(70vh);
+  transition: 0.13s ease;
+  transform: scaleY(0) translateY(100vh);
+
+  @include second-mobile-responsiveness {
+    margin:0 6px;
+  }
 
   &.open {
     transform: scaleY(1) translateY(-15vh);
@@ -101,7 +109,8 @@
 
   main {
     height: 100%;
-    width: 100%;
+    width: 85%;
+    margin: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
 
