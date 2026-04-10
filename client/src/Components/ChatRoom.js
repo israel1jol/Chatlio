@@ -123,7 +123,7 @@ const ChatRoom = ({addr}) => {
                     <div className="chat-panel">
                         <section className="receiver-profile">
                             {
-                                chat.receiver.profileImage !== "" ? <img src={`${addr}/api/v1/uploads/`+ltp(chat.receiver.profileImage)} alt="profile pic" /> : <FaUserCircle className="no-user-profile"/>
+                                chat.receiver.profileImage !== "" ? <img src={chat.receiver.profileImage} alt="profile pic" /> : <FaUserCircle className="no-user-profile"/>
                             }
                 
                             <div><h3>{chat.receiver.username}</h3><p></p></div>

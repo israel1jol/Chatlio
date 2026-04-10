@@ -81,7 +81,7 @@ const Chat = ({addr}) => {
             {
                 userFound ? 
                 <div className="user-profile">
-                    { userFound.profileImage !== "" ? <img src={`${addr}/api/v1/uploads/${ltp(userFound.profileImage)}`} alt="profile pic"/> : <FaUserCircle className="no-user-profile" /> }
+                    { userFound.profileImage !== "" ? <img src={userFound.profileImage} alt="profile pic"/> : <FaUserCircle className="no-user-profile" /> }
                     
                     <section>
                         <h1>{userFound.username}</h1>
@@ -96,7 +96,7 @@ const Chat = ({addr}) => {
                             contacts.map(contact => (
                                 <li key={contact.id}>
                                     <Link className="chat-link-btn" to={"/chat?receiver="+contact.id+"&encrypted=false"}>
-                                        { contact.profileImage !== "" ? <img src={`${addr}/api/v1/uploads/`+ltp(contact.profileImage)} /> : <FaUserCircle className="no-user-icon"/>}
+                                        { contact.profileImage !== "" ? <img src={contact.profileImage} /> : <FaUserCircle className="no-user-icon"/>}
                                         <h5>{contact.username}</h5>
                                     </Link>
                                 </li>
