@@ -6,6 +6,25 @@ import { Link } from "react-router-dom";
 const Home = () => {
     const [showPanel, setShowPanel] = useState(false);
     const auth = useSelector(store => store.auth);
+    const [copied, setCopied] = useState(false);
+
+    const copyToClipboard = async (text) => {
+        try {
+            await navigator.clipboard.writeText(text);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch (err) {
+            // fallback for older browsers
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        }
+    };
 
     const toggle = () => {
         const panel = document.querySelector(".panel");
@@ -45,7 +64,18 @@ const Home = () => {
                         <p>
                             Connect with your friends with their unique ID to start interacting with them.
                         </p>
-                        { auth.user.username === "Guest" ? <div><Link to="/register" className="panel-btn">Sign up to get started</Link></div> : <span>Your Id is <em>{auth.user.id}</em></span> }
+                        { 
+                        auth.user.username === "Guest" ? 
+                        <div>
+                            <Link to="/register" className="panel-btn">Sign up to get started</Link>
+                        </div> :
+                        <div>
+                         <p>Your Id is <em>{auth.user.id}</em></p>
+                         <button onClick={() => copyToClipboard(auth.user.id)} className="copy-btn">
+                                {copied ? "Copied!" : "Copy"}
+                        </button>
+                         </div>
+                        }
                     </section>
                     <section className="panel-box-beta">
                         <img src="https://i.postimg.cc/RFTsKrQF/People-Talking-Illustration.jpg" alt="image2" />
