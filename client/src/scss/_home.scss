@@ -137,6 +137,15 @@
         }
       }
 
+      .copy-btn{
+        display: inline-block;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.185);
+        padding: 8px;
+        text-decoration: none; 
+      }
+
       .panel-btn {
         background: rgb(255, 255, 255);
         border-radius: 10px;
