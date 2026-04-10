@@ -1,6 +1,7 @@
 const route = require("express").Router();
 const Room = require("../models/Room");
 const User = require("../models/User");
+// const Message = require("../models/Message");
 const { validateAccessToken } = require("../middleware/index");
 const {mailNewChatMessage} = require("../middleware/mailer");
 
@@ -40,5 +41,16 @@ route.post("/recentChats", validateAccessToken, async (req, res) => {
         return res.json({"error":"Something went wrong on our end. Sorry!", "msg":e.message})
     }
 })
+
+// route.post("/userMessages", validateAccessToken, async (req, res) =>{
+//     try{
+//         const id = req.user.id
+//         const msgs = Message.find({})
+
+
+//     } catch (e){
+//         return res.json({"error":"Something went wrong on our end. Sorry!", "msg":e.message})
+//     }
+// })
 
 module.exports = route;

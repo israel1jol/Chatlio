@@ -7,7 +7,10 @@ export const useLtp = () => {
 }
 
 export const useAuth = () => {
-    const SERVER_ADDR =  "https://chatlio-backend-server.onrender.com"
+    const SERVER_ADDR = process.env.NODE_ENV === "production" 
+        ? "https://chatlio-backend-server.onrender.com"
+        : "http://localhost:8081";
+        
     const dispatch = useDispatch();
 
     return (email, password) => {

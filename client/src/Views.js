@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Login from "./Pages/Login";
 import Home from "./Pages/Home";
+import Profile from "./Pages/Profile";
 import Register from "./Pages/Register";
 import Chat from "./Pages/Chat";
 import { SuspenseLoader } from "./Components/Loaders";
@@ -14,7 +15,9 @@ const Navbar = React.lazy(() => import("./Components/Navbar"));
 export default function Views(){
     const dispatch = useDispatch();
 
-    const SERVER_ADDR ="https://chatlio-backend-server.onrender.com"
+    const SERVER_ADDR = process.env.NODE_ENV === "production" 
+        ? "https://chatlio-backend-server.onrender.com"
+        : "http://localhost:8081";
 
     useEffect(() => {
         const token = localStorage.getItem("refToken");
@@ -69,6 +72,7 @@ export default function Views(){
                         <Route path="/register" element={<Register addr={SERVER_ADDR}/>}/>
                         <Route path="/explore" element={<Chat addr={SERVER_ADDR}/>}/>
                         <Route path="/chat" element={<ChatRoom addr={SERVER_ADDR}/>}/>
+                        <Route path="/profile" element={<Profile addr={SERVER_ADDR}/>}/>
                     </Routes>
                 </Router>
             </Suspense>

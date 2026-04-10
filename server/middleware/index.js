@@ -15,18 +15,26 @@ const validateRefreshToken = async (req, res, next) => {
         }
     }
     else{
-        return res.status(401).json({"error":"Invalid refresh token"});
+        return res.status(400).json({"error":"Invalid refresh token"});
     }
 }
 
 const validateAccessToken = async (req, res, next) => {
-    const token = req.body.token;
+    let token = req.body.token;
+    if (!token) {
+        // Fallback for multipart or header
+        const authHeader = req.headers.authorization;
+        if (authHeader && authHeader.startsWith("Bearer ")) {
+            token = authHeader.split(" ")[1];
+        }
+    }
     try{
         const payload = jwt.verify(token, process.env.ACCESS_KEY);
         req.user = payload;
         next();
     }
     catch(e){
+        console.log("Access token validation error:", e);
         return res.status(401).json({"error":"Invalid access token"});
     }
 
