@@ -177,3 +177,41 @@
     }
   }
 }
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.toggler {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  position: absolute;
+  bottom: 10px;
+  cursor: pointer;
+  z-index: 10000;
+  left: 50vw;
+  transition: 0.9s ease;
+  animation: float 3s ease-in-out infinite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+
+  .toggler-text {
+    font-size: 12px;
+    color: grey;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  &.open {
+    transform: translateY(-81vh) rotate(180deg);
+    animation: none;
+  }
+}
