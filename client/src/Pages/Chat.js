@@ -81,7 +81,7 @@ const Chat = ({addr}) => {
             {
                 userFound ? 
                 <div className="user-profile">
-                    { userFound.profileImage !== "" ? <img src={userFound.profileImage} alt="profile pic"/> : <FaUserCircle className="no-user-profile" /> }
+                    { userFound.profileImage !== "" ? <img src={userFound.profileImage} alt="profile"/> : <FaUserCircle className="no-user-profile" /> }
                     
                     <section>
                         <h1>{userFound.username}</h1>
