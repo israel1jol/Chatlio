@@ -66,7 +66,7 @@ route.post("/register", async (req, res) =>{
 
 route.post("/profilePic", upload.single("pic"), validateAccessToken, async (req, res) => {
     const id = req.user.id;
-    const img = req.file.path;
+    const img = req.file.location;
     try{
         const response = await User.findByIdAndUpdate(id, {$set: {profileImage:img}});
         return res.redirect(process.env.CLIENT_SERVER);
