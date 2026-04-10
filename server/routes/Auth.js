@@ -64,21 +64,22 @@ route.post("/register", async (req, res) =>{
     })
 })
 
-route.post("/profilePic", upload.single("pic"), validateAccessToken, async (req, res) => {
-
-    try{
+route.post("/profilePic", validateAccessToken, upload.single("pic"), async (req, res) => {
+    try {
         if (!req.file) {
             return res.status(400).json({ error: "No file uploaded or file rejected" });
         }
+
         const id = req.user.id;
-        const img = req.file.location;
-        const response = await User.findByIdAndUpdate(id, {$set: {profileImage:img}});
-        return res.redirect(process.env.CLIENT_SERVER);
+        const img = req.file.location || req.file.key || req.file.path;
+        const user = await User.findByIdAndUpdate(id, { $set: { profileImage: img } }, { new: true });
+
+        return res.json({ message: "Profile image updated", user });
+    } catch (e) {
+        console.error("profilePic error:", e);
+        return res.status(500).json({ error: "Could not update profile image" });
     }
-    catch(e){
-        return res.status(401).json({"error":"Could not update profile image"});
-    }
-})
+});
 
 route.post("/login", async (req, res) => {
     const email = req.body.email;
@@ -103,5 +104,33 @@ route.get("/accessToken", validateRefreshToken, (req, res) => {
     const token = jwt.sign(user, process.env.ACCESS_KEY, {expiresIn:1800});
     return res.json({accessToken:token});
 })
+
+route.post("/updateProfile", validateAccessToken, async (req, res) => {
+    const id = req.user.id;
+    const { firstname, lastname, username, email } = req.body;
+
+    try {
+        const emailOwner = await User.findOne({ email });
+        if (emailOwner && emailOwner._id.toString() !== id) {
+            return res.status(400).json({ error: "Email is already in use" });
+        }
+
+        const usernameOwner = await User.findOne({ username });
+        if (usernameOwner && usernameOwner._id.toString() !== id) {
+            return res.status(400).json({ error: "Username is already in use" });
+        }
+
+        const user = await User.findByIdAndUpdate(
+            id,
+            { $set: { firstname, lastname, username, email } },
+            { new: true }
+        );
+
+        return res.json(user);
+    } catch (e) {
+        console.error("updateProfile error:", e);
+        return res.status(500).json({ error: "Could not update profile" });
+    }
+});
 
 module.exports = route;
