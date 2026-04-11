@@ -60,8 +60,8 @@ const Home = () => {
                     {showPanel ? "Tap here to close" : "Click me"}
                 </p>
             </button>
-        
 
+            
             <div className="panel">
                 <main>
                     <section className="panel-box-alpha">

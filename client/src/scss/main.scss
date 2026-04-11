@@ -13,23 +13,28 @@
   scroll-behavior: smooth;
 }
 
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+.no-scroll {
   overflow: hidden;
 }
 
-::-webkit-scrollbar {
-  width: 7px;
-  margin: 6px;
-  padding: 6px;
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x:hidden ;
 }
 
-::-webkit-scrollbar-track {
-  border-radius: 12px;
-  background-color: transparent;
+::-webkit-scrollbar {
+  width: 4px;
 }
+
 
 ::-webkit-scrollbar-thumb {
   border-radius: 12px;
-  background-color: rgba(0, 0, 0, 0.589);
+  background-color: rgba(9, 9, 9, 0.589);
 }
+
+::-webkit-scrollbar-corner
+{
+  display: none;
+}
+
+

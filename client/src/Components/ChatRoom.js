@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { io } from "socket.io-client";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -21,6 +21,7 @@ const ChatRoom = ({addr}) => {
     const [msg, setMsg] = useState("");
     const [userId, setUserId] = useState("");
     const [isLoading, setIsLoading] = useState(true);
+    const chatRef = useRef(null);
 
     useEffect(() => {
         if(!localStorage.getItem("refToken")){
@@ -82,6 +83,12 @@ const ChatRoom = ({addr}) => {
     }, [socket])
 
     useEffect(() => {
+        if (chatRef.current) {
+            chatRef.current.scrollTop = chatRef.current.scrollHeight;
+        }
+    }, [messages]);
+
+    useEffect(() => {
         return () => {
             socket.emit("leaving", roomId, (err) => {
                 if(err){
@@ -131,7 +138,7 @@ const ChatRoom = ({addr}) => {
                         <main>
                             <div className="chat-bg">
                                 <div className="chat-setting">
-                                    <div className="chat-stage-layout">
+                                    <div className="chat-stage-layout" ref={chatRef}>
                                         <ul>
                                             {
                                                 messages.map(message => (

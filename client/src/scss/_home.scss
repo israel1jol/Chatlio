@@ -1,3 +1,5 @@
+
+
 .home-header {
   display: block;
   margin: 10px auto;
@@ -88,13 +90,12 @@
   height: 90vh;
   overflow-y: scroll;
   opacity: 0;
-  padding: 40px 20px;
+  padding: 30px;
   position: absolute;
   top: 25vh;
   left: 0;
   transition: 0.13s ease;
   transform: scaleY(0) translateY(100vh);
-  scrollbar-width: thin;
 
   @include second-mobile-responsiveness {
     margin:0 6px;

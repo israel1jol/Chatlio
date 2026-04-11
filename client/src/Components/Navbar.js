@@ -10,9 +10,11 @@ const Navbar = ({addr}) => {
     const [toggled, setToggled] = useState(false);
     const user = useSelector(store => store.auth);
 
+
     const menuBtnHandler = () => {
         const burger_menu = document.getElementById("hamburger-btn");
         const nav = document.getElementById("responsive-nav");
+        document.body.classList.toggle('no-scroll');
         if(!toggled){
             burger_menu.classList.add("open");
             nav.classList.add("open");
@@ -56,13 +58,14 @@ const Navbar = ({addr}) => {
              <div className="responsive-nav-view">
                  <div className="user-profile-details">
                     { user.user.profileImage !== "" ? <img src={user.user.profileImage} /> : <FaUserCircle className="user-icon"/> }
-                    <Link to="/profile" className="link" style={{margin:"12px"}}>Profile</Link>
+                    
                  </div>
                  <div className="hamburger-btn" id="hamburger-btn" onClick={menuBtnHandler}></div>
                  <nav className="responsive-nav" id="responsive-nav">
                      <ul>
                          <li><Link to="/" className="nav-link" onClick={menuBtnHandler}>Home</Link></li>
                          <li><Link to="/explore" className="nav-link" onClick={menuBtnHandler}>Explore</Link></li>
+                         <li><Link to="/profile" className="nav-link" onClick={menuBtnHandler}>Profile</Link></li>
                          <li><p className="logout-btn nav-link" onClick={(e) => logout()}>Logout</p></li>
                      </ul>
                  </nav>

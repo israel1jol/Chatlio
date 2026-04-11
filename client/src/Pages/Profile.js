@@ -164,67 +164,69 @@ const Profile = ({ addr }) => {
 
     return (
         <div className="profile-page">
-            <div className="profile-card">
-                <aside className="profile-sidebar">
-                    <div className="profile-avatar">
-                        {picPreview ? (
-                            <img src={picPreview} alt="Preview" />
-                        ) : auth.user.profileImage ? (
-                            <img src={auth.user.profileImage} alt="Profile" />
-                        ) : (
-                            <div className="avatar-placeholder">No image</div>
-                        )}
-                    </div>
-
-                    <div className="profile-sidebar-meta">
-                        <h2>{auth.user.username}</h2>
-                        <p>{auth.user.email}</p>
-                    </div>
-
-                    <div className="profile-photo-actions">
-                        <label className="file-label">
-                            {picFile ? "Change photo" : "Upload a photo"}
-                            <input type="file" name="pic" accept="image/*" onChange={handleFileChange} />
-                        </label>
-
-                        {picFile && (
-                            <button type="button" onClick={uploadProfilePic} disabled={uploading}>
-                                {uploading ? "Uploading..." : "Save photo"}
-                            </button>
-                        )}
-                    </div>
-                </aside>
-
-                <main className="profile-main">
-                    {error && <div className="profile-message error">{error}</div>}
-                    {status && <div className="profile-message success">{status}</div>}
-
-                    <h3>Edit profile</h3>
-                    <form className="profile-form" onSubmit={handleSubmit}>
-                        <label className="form-group">
-                            <span>First name</span>
-                            <input name="firstname" value={form.firstname} onChange={handleChange} required />
-                        </label>
-                        <label className="form-group">
-                            <span>Last name</span>
-                            <input name="lastname" value={form.lastname} onChange={handleChange} required />
-                        </label>
-                        <label className="form-group">
-                            <span>Username</span>
-                            <input name="username" value={form.username} onChange={handleChange} required />
-                        </label>
-                        <label className="form-group">
-                            <span>Email</span>
-                            <input name="email" type="email" value={form.email} onChange={handleChange} required />
-                        </label>
-
-                        <div className="profile-actions">
-                            <button type="submit" className="submit-btn">
-                                Save changes
-                            </button>
+            <div className="test-comp">
+                <div className="profile-card">
+                    <aside className="profile-sidebar">
+                        <div className="profile-avatar">
+                            {picPreview ? (
+                                <img src={picPreview} alt="Preview" />
+                            ) : auth.user.profileImage ? (
+                                <img src={auth.user.profileImage} alt="Profile" />
+                            ) : (
+                                <div className="avatar-placeholder">No image</div>
+                            )}
                         </div>
-                    </form>
-                </main>
+
+                        <div className="profile-sidebar-meta">
+                            <h2>{auth.user.username}</h2>
+                            <p>{auth.user.email}</p>
+                        </div>
+
+                        <div className="profile-photo-actions">
+                            <label className="file-label">
+                                {picFile ? "Change photo" : "Upload a photo"}
+                                <input type="file" name="pic" accept="image/*" onChange={handleFileChange} />
+                            </label>
+
+                            {picFile && (
+                                <button type="button" onClick={uploadProfilePic} disabled={uploading}>
+                                    {uploading ? "Uploading..." : "Save photo"}
+                                </button>
+                            )}
+                        </div>
+                    </aside>
+
+                    <main className="profile-main">
+                        {error && <div className="profile-message error">{error}</div>}
+                        {status && <div className="profile-message success">{status}</div>}
+
+                        <h3>Edit profile</h3>
+                        <form className="profile-form" onSubmit={handleSubmit}>
+                            <label className="form-group">
+                                <span>First name</span>
+                                <input name="firstname" value={form.firstname} onChange={handleChange} required />
+                            </label>
+                            <label className="form-group">
+                                <span>Last name</span>
+                                <input name="lastname" value={form.lastname} onChange={handleChange} required />
+                            </label>
+                            <label className="form-group">
+                                <span>Username</span>
+                                <input name="username" value={form.username} onChange={handleChange} required />
+                            </label>
+                            <label className="form-group">
+                                <span>Email</span>
+                                <input name="email" type="email" value={form.email} onChange={handleChange} required />
+                            </label>
+
+                            <div className="profile-actions">
+                                <button type="submit" className="submit-btn">
+                                    Save changes
+                                </button>
+                            </div>
+                        </form>
+                    </main>
+                </div>
             </div>
         </div>
     );
