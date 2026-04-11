@@ -13,12 +13,13 @@
   scroll-behavior: smooth;
 }
 
-.no-scroll {
-  overflow: hidden;
-}
-
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x:hidden;
+}
+
+.no-scroll {
+  overflow: hidden;
 }
 
 ::-webkit-scrollbar {
