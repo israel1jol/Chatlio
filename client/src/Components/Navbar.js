@@ -56,7 +56,7 @@ const Navbar = ({addr}) => {
              <div className="responsive-nav-view">
                  <div className="user-profile-details">
                     { user.user.profileImage !== "" ? <img src={user.user.profileImage} /> : <FaUserCircle className="user-icon"/> }
-                    <Link to="/profile" className="link">{user.user.username}</Link>
+                    <Link to="/profile" className="link" style={{margin:"12px"}}>Profile</Link>
                  </div>
                  <div className="hamburger-btn" id="hamburger-btn" onClick={menuBtnHandler}></div>
                  <nav className="responsive-nav" id="responsive-nav">
