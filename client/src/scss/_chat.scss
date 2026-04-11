@@ -192,12 +192,7 @@
 
       @include second-mobile-responsiveness {
         width: 90vw;
-        margin: 50px auto 0 auto; 
         position: relative;
-      }
-
-      @media (max-height:670px){
-        margin-top: 20px;
       }
 
       .chat-setting {
