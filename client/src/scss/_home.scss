@@ -87,7 +87,6 @@
   border-radius: 10px 10px 0 0;
   height: 90vh;
   overflow-y: scroll;
-  width: 100%;
   opacity: 0;
   padding: 40px 20px;
   position: absolute;
@@ -95,10 +94,10 @@
   left: 0;
   transition: 0.13s ease;
   transform: scaleY(0) translateY(100vh);
+  scrollbar-width: thin;
 
   @include second-mobile-responsiveness {
     margin:0 6px;
-    height: 100vh;
   }
 
   &.open {
@@ -108,13 +107,13 @@
   }
 
   main {
-    width: 85%;
-    margin: auto;
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
 
     @include second-mobile-responsiveness {
       display: block;
+      height: 160vh;
     }
 
     .panel-box-beta {
@@ -127,8 +126,15 @@
     }
 
     section {
-      width: 100%;
+      width: 70%;
+      margin: auto;
+      height: 80%;
       padding: 5px;
+      position: relative;
+
+      @include second-mobile-responsiveness {
+        height: 45%
+      }
 
       img {
         width: 100%;
@@ -168,15 +174,16 @@
       }
 
       .panel-btn {
+        display: inline-block;
         background: rgb(255, 255, 255);
         border-radius: 10px;
         box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.185);
         padding: 8px;
+        margin: 2px 19px;
         text-decoration: none;
         color: $app-def-color;
         transition: all ease 400;
-        margin: 20px 0;
-        display: inline-block;
+        
 
         &:hover {
           color: white;

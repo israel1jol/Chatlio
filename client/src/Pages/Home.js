@@ -60,31 +60,29 @@ const Home = () => {
                     {showPanel ? "Tap here to close" : "Click me"}
                 </p>
             </button>
+        
 
-            
             <div className="panel">
                 <main>
                     <section className="panel-box-alpha">
                         <img src="https://i.postimg.cc/5tLk9QX8/2292-R0l-VIEFOTi-Aw-NTYt-MTA4.jpg" alt="image1" />
-                        <div>
-                            <p>
+                    
+                        <p>
                             Connect with your friends with their unique ID to start interacting with them.
-                            </p>
-                            { 
-                            auth.user.username === "Guest" ? 
-                            
-                                <Link to="/register" className="panel-btn">Sign up to get started</Link>
-                             :
-                            <div>
-                            <p>Your Id is <em>{auth.user.id}</em>
-                            <span onClick={() => copyToClipboard(auth.user.id)} className="copy-btn">
-                                    {copied ? "Copied!" : "Copy"}
-                            </span>
-                            </p>
-                            </div>
-                            }
-                        </div>
-                        
+                        </p>
+                        { 
+                        auth.user.username === "Guest" ? 
+                        <div>
+                            <Link to="/register" className="panel-btn">Sign up to get started</Link>
+                        </div> :
+                        <div>
+                         <p>Your Id is <em>{auth.user.id}</em>
+                         <span onClick={() => copyToClipboard(auth.user.id)} className="copy-btn">
+                                {copied ? "Copied!" : "Copy"}
+                        </span>
+                        </p>
+                         </div>
+                        }
                     </section>
                     <section className="panel-box-beta">
                         <img src="https://i.postimg.cc/RFTsKrQF/People-Talking-Illustration.jpg" alt="image2" />
