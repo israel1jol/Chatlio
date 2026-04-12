@@ -42,7 +42,7 @@ const Navbar = ({addr}) => {
                  <div className="hamburger-btn" id="hamburger-btn" onClick={menuBtnHandler}></div>
                  <nav className="responsive-nav" id="responsive-nav">
                      <ul>
-                        {isHome && <li><Link to="/" className="nav-link" onClick={menuBtnHandler}>Home</Link></li>}
+                        {!isHome && <li><Link to="/" className="nav-link" onClick={menuBtnHandler}>Home</Link></li>}
                          <li><Link to="/login" className="nav-link" onClick={menuBtnHandler}>Login</Link></li>
                          <li><Link to="/register" className="nav-link" onClick={menuBtnHandler}>Sign Up</Link></li>
                      </ul>
@@ -51,7 +51,7 @@ const Navbar = ({addr}) => {
 
              <nav className="standard-nav">
                  <ul>
-                     {isHome&& <li><Link to="/" className="nav-link">Home</Link></li>}
+                     {!isHome&& <li><Link to="/" className="nav-link">Home</Link></li>}
                      <li><Link to="/login" className="nav-link">Login</Link></li>
                      <li><Link to="/register" className="nav-link">Sign Up</Link></li>
                  </ul>
@@ -65,7 +65,7 @@ const Navbar = ({addr}) => {
                  <div className="hamburger-btn" id="hamburger-btn" onClick={menuBtnHandler}></div>
                  <nav className="responsive-nav" id="responsive-nav">
                      <ul>
-                         {isHome&& <li><Link to="/" className="nav-link" onClick={menuBtnHandler}>Home</Link></li>}
+                         {!isHome&& <li><Link to="/" className="nav-link" onClick={menuBtnHandler}>Home</Link></li>}
                          <li><Link to="/explore" className="nav-link" onClick={menuBtnHandler}>Explore</Link></li>
                          <li><Link to="/profile" className="nav-link" onClick={menuBtnHandler}>Profile</Link></li>
                          <li><p className="logout-btn nav-link" onClick={(e) => logout()}>Logout</p></li>
@@ -75,7 +75,7 @@ const Navbar = ({addr}) => {
 
              <nav className="standard-nav">
                  <ul>
-                     {isHome&& <li><Link to="/" className="nav-link">Home</Link></li>}
+                     {!isHome&& <li><Link to="/" className="nav-link">Home</Link></li>}
                      <li><Link to="/explore" className="nav-link">Explore</Link></li>
                      <li><Link to="/profile" className="simple-btn simple-btn-primary">{user.user.username}</Link></li>
                      <li><p className="logout-btn nav-link" onClick={(e) => logout()}>Logout</p></li>
